@@ -183,7 +183,7 @@ forecast_dataframe['hour']=forecast_dataframe['datetime_msc'].str[-8:-6].astype(
 forecast_dataframe['cloudcover']=100-forecast_dataframe['cloudcover'].astype('float')
 test_dataframe=forecast_dataframe.drop(forecast_dataframe.index[np.where(forecast_dataframe['datetime_msc'] < str(date_beg_predict))[0]])
 test_dataframe.drop(forecast_dataframe.index[np.where(forecast_dataframe['datetime_msc'] > str(date_end_predict))[0]], inplace=True)
-test_dataframe=test_dataframe[test_dataframe['gtp'].str.contains('GVIE', regex=False)]
+test_dataframe=test_dataframe[test_dataframe['gtp'].str.contains('G', regex=False)]
 test_dataframe=test_dataframe.merge(ses_dataframe, left_on=['gtp'], right_on = ['gtp'], how='right')
 
 forecast_dataframe.drop(forecast_dataframe.index[np.where(forecast_dataframe['datetime_msc'] > str(datetime.datetime.today()))[0]], inplace=True)
@@ -228,7 +228,7 @@ predict_dataframe=test_dataframe.drop(['datetime_msc','tzoffset','loadtime','sun
 """ print(predict_dataframe) """
 
 x_train, x_validation, y_train, y_validation = train_test_split(x, y, train_size=0.8)
-#n_estimators=25,#
+
 reg = catboost.CatBoostRegressor(depth = 10, boosting_type = 'Plain', bootstrap_type = 'Bayesian', learning_rate = 0.36195511036206707, bagging_temperature = 0.0824751595037756,
                         l2_leaf_reg = 0.07142313478321591, colsample_bylevel = 0.09800411259303943, min_data_in_leaf = 4, one_hot_max_size = 19,
                         loss_function = 'RMSE', cat_features = ['gtp','preciptype','conditions']).fit(x_train, y_train, eval_set=(x_validation, y_validation), silent = True)
