@@ -1,0 +1,29 @@
+telegram:
+- bot_token: 'xxxxxx'
+  channel_id: xxxxxx
+- bot_token: 'xxxxxx'
+  channel_id: xxxxxx
+sql_db:
+- host: xxx.xxx.xx.xxx
+  user: xxxxxxx
+  port: xxxx
+  password: xxxxxxxxxx
+  database: xxxxxxxxxx
+- host: xxx.xxx.xx.xxx
+  user: xxxxxxx
+  port: xxxx
+  password: xxxxxxxxxx
+  database: xxxxxxxxxx
+- host: xxx.xxx.xx.xxx
+  user: xxxxxxx
+  port: xxxx
+  password: xxxxxxxxxx
+  database: xxxxxxxxxx
+pyodbc_db:
+- host: xxx.xxx.xx.xxx
+  user: xxxxxxx
+  port: xxxx
+  password: xxxxxxxxxx
+  database: xxxxxxxxxx
+visualcrossing_api:
+- api_key: xxxxxxxxxxxxxxxxxxxxxxxx
