@@ -696,6 +696,7 @@ def prepare_forecast_catboost(forecast_dataframe, test_dataframe):
         COL_PARAMETERS + ["loadtime", "def_power"],
         axis="columns",
         inplace=True,
+        errors="ignore",
     )
 
     # Добавить к датафрейму столбцы с текущей датой и id прогноза
