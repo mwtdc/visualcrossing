@@ -472,15 +472,22 @@ def prepare_datasets_to_train():
         | (ses_dataframe["gtp"].str.contains("GROZ", regex=False))
     ]
     logging.info("Загружен датафрейм с гтп и установленной мощностью.")
-    # убрать столбец "datetime" из списка
 
     forecast_dataframe = load_data_from_db(
         "visualcrossing.forecast",
-        DB_COLUMNS.remove("datetime"),
+        DB_COLUMNS,
         0,
         "loadtime",
         365,
     )
+    forecast_dataframe.drop(
+        [
+            "datetime",
+        ],
+        axis="columns",
+        inplace=True,
+    )
+    
     logging.info("Загружен массив прогноза погоды за предыдущие дни")
 
     # Удаление дубликатов прогноза,
