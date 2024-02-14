@@ -713,12 +713,6 @@ def prepare_forecast_catboost(forecast_dataframe, test_dataframe):
         f" от нулевых значений и обрезку по макс за месяц"
     )
 
-    # test_dataframe.to_excel(
-    #     f"{pathlib.Path(__file__).parent.absolute()}/"
-    #     f"{(datetime.datetime.today() + datetime.timedelta(days=1)).strftime('%d.%m.%Y')}"
-    #     "_skm_rsv.xlsx"
-    # )
-
     # Запись прогноза в БД
     load_data_to_db("weather_foreca", 1, test_dataframe)
 
