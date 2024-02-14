@@ -14,11 +14,6 @@ sql_db:
   port: xxxx
   password: xxxxxxxxxx
   database: xxxxxxxxxx
-- host: xxx.xxx.xx.xxx
-  user: xxxxxxx
-  port: xxxx
-  password: xxxxxxxxxx
-  database: xxxxxxxxxx
 pyodbc_db:
 - host: xxx.xxx.xx.xxx
   user: xxxxxxx
