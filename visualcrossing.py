@@ -693,7 +693,12 @@ def prepare_forecast_catboost(forecast_dataframe, test_dataframe):
     )
 
     test_dataframe.drop(
-        COL_PARAMETERS + ["loadtime", "def_power"],
+        COL_PARAMETERS
+        + [
+            "loadtime",
+            "def_power",
+            "tzoffset",
+        ],
         axis="columns",
         inplace=True,
         errors="ignore",
