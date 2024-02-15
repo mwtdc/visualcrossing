@@ -330,7 +330,7 @@ def load_forecast_to_db(date_beg, date_end, api_key, col_parameters):
     # ]
     ses_dataframe = ses_dataframe[
         (ses_dataframe["gtp"].str.contains("GVIE", regex=False))
-        | (ses_dataframe["gtp"].str.contains("GKZ", regex=False))
+        | (ses_dataframe["gtp"].str.contains("GKZ0", regex=False))
         | (ses_dataframe["gtp"].str.contains("GROZ", regex=False))
     ]
     ses_dataframe.reset_index(inplace=True)
@@ -425,11 +425,31 @@ def load_forecast_to_db(date_beg, date_end, api_key, col_parameters):
                 )
 
             dataframe_3 = dataframe_3.append(dataframe_2, ignore_index=True)
-            dataframe_3["preciptype"].replace("""['""", "", inplace=True)
-            dataframe_3["preciptype"].replace("""']""", "", inplace=True)
-            dataframe_3["preciptype"].replace("""', '""", ",", inplace=True)
-            dataframe_3["preciptype"].replace(" ", "None", inplace=True)
-            dataframe_3["solarenergy"].replace(" ", "0.0", inplace=True)
+            dataframe_3["preciptype"] = (
+                dataframe_3["preciptype"]
+                .astype("str")
+                .str.replace("['", "", regex=False)
+            )
+            dataframe_3["preciptype"] = (
+                dataframe_3["preciptype"]
+                .astype("str")
+                .str.replace("']", "", regex=False)
+            )
+            dataframe_3["preciptype"] = (
+                dataframe_3["preciptype"]
+                .astype("str")
+                .str.replace("', '", ",", regex=False)
+            )
+            dataframe_3["preciptype"] = (
+                dataframe_3["preciptype"]
+                .astype("str")
+                .str.replace(" ", "None", regex=False)
+            )
+            dataframe_3["solarenergy"] = (
+                dataframe_3["solarenergy"]
+                .astype("str")
+                .str.replace(" ", "0.0", regex=False)
+            )
             dataframe_3.fillna(0, inplace=True)
             # print(dataframe_3)
         weather_dataframe = weather_dataframe.append(
@@ -468,7 +488,7 @@ def prepare_datasets_to_train():
     # ]
     ses_dataframe = ses_dataframe[
         (ses_dataframe["gtp"].str.contains("GVIE", regex=False))
-        | (ses_dataframe["gtp"].str.contains("GKZ", regex=False))
+        | (ses_dataframe["gtp"].str.contains("GKZ0", regex=False))
         | (ses_dataframe["gtp"].str.contains("GROZ", regex=False))
     ]
     logging.info("Загружен датафрейм с гтп и установленной мощностью.")
