@@ -868,9 +868,7 @@ def optuna_tune_params(forecast_dataframe, test_dataframe):
 # 3 - optuna_tune_params - подбор параметров для модели через оптуну
 # необходимо в нее передать 2 датафрейма из предыдущей функции.
 # 4 - prepare_forecast_xgboost - подготовка прогноза,
-# в нее также необходимо передавать 2 датафрейма и список столбцов,
-# который потом используется для удаления лишних столбцов,
-# чтобы excel файл меньше места занимал.
+
 
 # # 1
 load_forecast_to_db(DATE_BEG, DATE_END, API_KEY, COL_PARAMETERS)
