@@ -630,9 +630,6 @@ def prepare_forecast_catboost(forecast_dataframe, test_dataframe):
     )
     predict_dataframe["gtp"] = predict_dataframe["gtp"].astype("int")
 
-    x_train, x_validation, y_train, y_validation = train_test_split(
-        x, y, train_size=0.9
-    )
     logging.info("Старт предикта на CatBoostRegressor")
     reg = catboost.CatBoostRegressor(
         depth=10,
@@ -648,7 +645,7 @@ def prepare_forecast_catboost(forecast_dataframe, test_dataframe):
     )
     regr = BaggingRegressor(
         base_estimator=reg, n_estimators=50, n_jobs=-1, random_state=118
-    ).fit(x_train, y_train)
+    ).fit(x, y)
     predict = regr.predict(predict_dataframe)
     test_dataframe["forecast"] = pd.DataFrame(predict)
     test_dataframe["forecast"] = test_dataframe["forecast"] * OVERVALUE_COEFF
