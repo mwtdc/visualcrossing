@@ -684,6 +684,7 @@ def prepare_forecast_catboost(forecast_dataframe, test_dataframe):
         right_on=["gtp", "hour"],
         how="left",
     )
+    test_dataframe.fact.fillna(test_dataframe.def_power, inplace=True)
     test_dataframe.fillna(0, inplace=True)
     test_dataframe["forecast"] = test_dataframe[
         ["forecast", "fact", "def_power"]
